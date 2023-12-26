@@ -56,7 +56,7 @@ export const ProductList = [
       title: "UI/UX Program",
       description:
         "Learn to use industry-standard design tools such as Adobe XD, Sketch, and Figma.",
-      price: 280,
+      price: 28000,
       discountPercentage: 17.91,
       rating: 4.3,
       stock: 123,

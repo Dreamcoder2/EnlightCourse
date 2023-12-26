@@ -26,8 +26,9 @@ export const cartSlice = createSlice({
                 ...state.list.slice(0,index),
                 {...state.list[index],count:payload.count},
                 ...state.list.slice(index+1),
-            ];
-        }
+            ];          
+        },
+        
     },
 });
 
