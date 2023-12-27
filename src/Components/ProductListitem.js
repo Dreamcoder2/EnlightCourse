@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setOverallPrice, setOverallQuantity } from "../redux/reducer/cart";
 
 export default function ProductListitem(props) {
+  const dispatch = useDispatch();
+
   const { price, count, discountPercentage } = props;
 
   const calculateSubtotal = () => {
@@ -18,12 +20,14 @@ export default function ProductListitem(props) {
     (total, item) => total + item.count,
     0
   );
+  dispatch(setOverallQuantity(overallQuantity));
   const overallAmount = cartItems.reduce(
     (total, item) => total + calculateTotalAmount(),
     0
   );
+  console.log(overallAmount);
+  dispatch(setOverallPrice(overallAmount));
   const [hasPrintedTotalSummary, setHasPrintedTotalSummary] = useState(false);
-
 
   return (
     <>
@@ -57,14 +61,6 @@ export default function ProductListitem(props) {
         <p>Total Quantity: {count}</p>
         <p>Total Amount: ₹{calculateTotalAmount()}</p>
       </div>
-
-      {hasPrintedTotalSummary && (
-        <div>
-          <h2>Total Summary</h2>
-          <p>Total Quantity: {overallQuantity}</p>
-          <p>Total Amount: ₹{overallAmount}</p>
-        </div>
-      )}
 
       {/* Update the state variable after rendering Total Summary */}
       {!hasPrintedTotalSummary && setHasPrintedTotalSummary(true)}
